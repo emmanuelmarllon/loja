@@ -18,7 +18,7 @@ const Account = () => {
       };
       fetchPurchases();
     }
-  }, [user, getPurchases]); // só uma array de dependências
+  }, [user, getPurchases]); // só uma array de dependências marlon gay
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -129,7 +129,7 @@ const Account = () => {
 
       {/* Ações rápidas */}
       <div className="profile-actions">
-        <h3>Ações Rápidas</h3>
+        <h3>Ações rápidas</h3>
         <button>Editar Perfil</button>
         <button>Alterar Senha</button>
         <button>Ver Favoritos</button>
