@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model produtos {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  category    String
+  createdAt   String
+  description String
+  details     String[]
+  discount    Int
+  featured    Boolean
+  gallery     String[]
+  image       String
+  name        String
+  price       Float
+  shortDesc   String
+}
+
+model reviews {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  comment   String
+  createdAt DateTime @db.Date
+  productId String   @db.ObjectId
+  rating    Int
+  userId    String   @db.ObjectId
+}
+
+model usu_rios_ {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  IsAdmin   Boolean
+  createdAt DateTime @db.Date @default(now())
+  email     String  @unique
+  name      String
+  password  String
+
+  @@map("usuários ")
+}

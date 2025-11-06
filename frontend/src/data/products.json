@@ -1,0 +1,504 @@
+[
+  {
+    "id": 1,
+    "name": "Adobe Illustrator",
+    "shortDesc": "Criação vetorial profissional",
+    "description": "O Adobe Illustrator é usado para criar logotipos, ícones, ilustrações e design vetorial com precisão e flexibilidade.",
+    "price": 720.0,
+    "discount": 95,
+    "category": "design",
+    "featured": true,
+    "image": "https://cdn.pixabay.com/photo/2021/02/03/12/28/adobe-illustrator-5977785_1280.png",
+    "gallery": [],
+    "details": [
+      "Compatível com Windows e Mac",
+      "Suporte a formatos vetoriais avançados",
+      "Integração com Photoshop e InDesign"
+    ],
+    "reviews": [{ "user": "oi", "rating": 2, "comment": "oi" }]
+  },
+  {
+    "id": 2,
+    "name": "Photoshop v26.9",
+    "shortDesc": "Edição e manipulação de imagens",
+    "description": "O Photoshop é o software mais usado do mundo para edição de fotos, design e composição digital.",
+    "price": 104.0,
+    "discount": 95,
+    "category": "design",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Photoshop",
+    "gallery": [],
+    "details": [
+      "Camadas e máscaras avançadas",
+      "Suporte a arquivos RAW",
+      "Integração com Lightroom e Illustrator"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 3,
+    "name": "CorelDRAW Graphics Suite",
+    "shortDesc": "Design gráfico completo",
+    "description": "O CorelDRAW é uma solução poderosa para ilustração, layout e edição vetorial.",
+    "price": 2200.0,
+    "discount": 20,
+    "category": "design",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=CorelDRAW",
+    "gallery": [],
+    "details": [
+      "Compatível com arquivos AI e PSD",
+      "Ferramentas de tipografia avançadas",
+      "Modo escuro e personalizável"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 4,
+    "name": "Adobe InDesign",
+    "shortDesc": "Diagramação e design editorial",
+    "description": "O Adobe InDesign é ideal para criar revistas, livros, catálogos e materiais impressos de forma profissional.",
+    "price": 239.99,
+    "discount": 10,
+    "category": "design",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=InDesign",
+    "gallery": [],
+    "details": [
+      "Criação de layouts responsivos",
+      "Integração com Illustrator e Photoshop",
+      "Suporte a exportação PDF interativo"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 5,
+    "name": "Autodesk AutoCAD",
+    "shortDesc": "Desenho técnico e modelagem 2D/3D",
+    "description": "O AutoCAD é usado mundialmente para criação de plantas, projetos e modelagens de engenharia e arquitetura.",
+    "price": 399.99,
+    "discount": 35,
+    "category": "engenharia",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=AutoCAD",
+    "gallery": [],
+    "details": [
+      "Suporte a DWG e DXF",
+      "Ferramentas 3D avançadas",
+      "Compatível com Revit e Inventor"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 6,
+    "name": "Adobe Lightroom Classic v13",
+    "shortDesc": "Edição de fotos e organização",
+    "description": "O Lightroom Classic é ideal para fotógrafos que precisam editar e gerenciar grandes coleções de imagens.",
+    "price": 189.99,
+    "discount": 15,
+    "category": "fotografia",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Lightroom",
+    "gallery": [],
+    "details": [
+      "Edição de fotos em lote",
+      "Ajustes de cor e iluminação",
+      "Sincronização com Adobe Cloud"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 7,
+    "name": "Vegas Pro 22",
+    "shortDesc": "Edição de vídeo avançada",
+    "description": "O Vegas Pro 22 é um editor de vídeo completo, com suporte a efeitos, transições e correção de cores.",
+    "price": 199.99,
+    "discount": 40,
+    "category": "edição",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Vegas+Pro+22",
+    "gallery": [],
+    "details": [
+      "Renderização acelerada por GPU",
+      "Edição multicâmera",
+      "Suporte a 4K e HDR"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 8,
+    "name": "Adobe Premiere Pro",
+    "shortDesc": "Edição de vídeo profissional",
+    "description": "O Premiere Pro é o padrão da indústria para edição de vídeos, usado por profissionais e criadores de conteúdo.",
+    "price": 299.99,
+    "discount": 50,
+    "category": "edição",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Premiere+Pro",
+    "gallery": [],
+    "details": [
+      "Integração com After Effects",
+      "Correção de cor e áudio",
+      "Suporte a formatos profissionais"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 9,
+    "name": "Adobe Incopy",
+    "shortDesc": "Criação e revisão de textos",
+    "description": "O Adobe InCopy é usado para edição colaborativa de textos junto ao InDesign, ideal para equipes editoriais.",
+    "price": 149.99,
+    "discount": 10,
+    "category": "texto",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=InCopy",
+    "gallery": [],
+    "details": [
+      "Integração total com InDesign",
+      "Gerenciamento de versões",
+      "Compatível com fontes OpenType"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 10,
+    "name": "Adobe After Effects",
+    "shortDesc": "Animações e efeitos visuais",
+    "description": "O After Effects é o software líder em motion graphics e efeitos visuais para vídeos e cinema.",
+    "price": 249.99,
+    "discount": 90,
+    "category": "animação",
+    "featured": true,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/2101px-Adobe_After_Effects_CC_icon.svg.png",
+    "gallery": [],
+    "details": [
+      "Integração com Premiere Pro",
+      "Animações 2D e 3D",
+      "Suporte a plugins e scripts"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 11,
+    "name": "Adobe Animate v24",
+    "shortDesc": "Criação de animações interativas",
+    "description": "O Adobe Animate permite criar animações para jogos, vídeos e aplicações web de forma simples.",
+    "price": 179.99,
+    "discount": 25,
+    "category": "animação",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Animate",
+    "gallery": [],
+    "details": [
+      "Exportação HTML5 e vídeo",
+      "Integração com Illustrator",
+      "Suporte a interatividade"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 12,
+    "name": "FL Studio 24",
+    "shortDesc": "Produção musical completa",
+    "description": "O FL Studio 24 é uma estação de trabalho de áudio digital usada para criar, gravar e mixar músicas.",
+    "price": 159.99,
+    "discount": 20,
+    "category": "áudio",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=FL+Studio+24",
+    "gallery": [],
+    "details": [
+      "Plugins nativos e efeitos",
+      "Sequenciador de batidas",
+      "Suporte a VST e MIDI"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 13,
+    "name": "FL Studio 25",
+    "shortDesc": "Criação de músicas com novos recursos",
+    "description": "O FL Studio 25 traz melhorias no mixer e novas ferramentas para produção musical profissional.",
+    "price": 169.99,
+    "discount": 15,
+    "category": "áudio",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=FL+Studio+25",
+    "gallery": [],
+    "details": [
+      "Novo motor de áudio",
+      "Interface aprimorada",
+      "Mais estabilidade e performance"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 14,
+    "name": "Ableton Live Suite 12",
+    "shortDesc": "Criação musical ao vivo e em estúdio",
+    "description": "O Ableton Live Suite 12 é usado para produção musical, performance ao vivo e mixagem criativa.",
+    "price": 299.99,
+    "discount": 25,
+    "category": "áudio",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Ableton+Live+12",
+    "gallery": [],
+    "details": [
+      "Modo Session e Arrangement",
+      "Instrumentos e efeitos nativos",
+      "Compatível com Push e MIDI"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 15,
+    "name": "DaVinci Resolve 20",
+    "shortDesc": "Edição e color grading profissional",
+    "description": "O DaVinci Resolve 20 combina edição, efeitos visuais, áudio e correção de cores num só programa.",
+    "price": 289.99,
+    "discount": 10,
+    "category": "edição",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=DaVinci+Resolve",
+    "gallery": [],
+    "details": [
+      "Suporte a HDR",
+      "Edição de áudio Fairlight",
+      "Correção de cor avançada"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 16,
+    "name": "Cinema 4D",
+    "shortDesc": "Modelagem e animação 3D",
+    "description": "O Cinema 4D é uma poderosa ferramenta para criação de modelagens, motion design e renderizações 3D.",
+    "price": 359.99,
+    "discount": 20,
+    "category": "3D",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Cinema+4D",
+    "gallery": [],
+    "details": [
+      "Renderização física e Redshift",
+      "Simulações realistas",
+      "Integração com After Effects"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 17,
+    "name": "Autodesk Revit",
+    "shortDesc": "Modelagem BIM para arquitetura",
+    "description": "O Revit é o software padrão para modelagem de informação da construção (BIM), usado em arquitetura e engenharia.",
+    "price": 449.99,
+    "discount": 30,
+    "category": "engenharia",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Revit",
+    "gallery": [],
+    "details": [
+      "Modelagem paramétrica",
+      "Colaboração em tempo real",
+      "Compatível com AutoCAD"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 18,
+    "name": "Filmora 14",
+    "shortDesc": "Edição de vídeo simples e eficiente",
+    "description": "O Filmora 14 é fácil de usar e oferece recursos criativos para iniciantes e criadores de conteúdo.",
+    "price": 89.99,
+    "discount": 50,
+    "category": "edição",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Filmora+14",
+    "gallery": [],
+    "details": [
+      "Efeitos e templates prontos",
+      "Exportação para redes sociais",
+      "Interface intuitiva"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 19,
+    "name": "Adobe Acrobat Pro",
+    "shortDesc": "Gerenciamento e edição de PDFs",
+    "description": "O Acrobat Pro permite criar, editar e assinar PDFs com segurança e integração total com o ecossistema Adobe.",
+    "price": 159.99,
+    "discount": 10,
+    "category": "produtividade",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Acrobat+Pro",
+    "gallery": [],
+    "details": [
+      "Conversão de arquivos",
+      "Assinatura eletrônica",
+      "Proteção com senha"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 20,
+    "name": "Autocad Inventor Pro 2026",
+    "shortDesc": "Modelagem mecânica 3D",
+    "description": "O Inventor Pro é usado para design de produtos e simulações mecânicas em alta precisão.",
+    "price": 499.99,
+    "discount": 25,
+    "category": "engenharia",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Inventor+Pro",
+    "gallery": [],
+    "details": [
+      "Simulações de movimento",
+      "Ferramentas de montagem",
+      "Exportação CAD"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 21,
+    "name": "Avid Pro Tools HD v12.5",
+    "shortDesc": "Produção e mixagem de áudio profissional",
+    "description": "O Pro Tools é a principal DAW para estúdios e profissionais de áudio no mundo todo.",
+    "price": 299.99,
+    "discount": 20,
+    "category": "áudio",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Pro+Tools",
+    "gallery": [],
+    "details": [
+      "Gravação multipista",
+      "Efeitos e automações avançadas",
+      "Compatível com hardware Avid"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 22,
+    "name": "Adobe Bridge 2025",
+    "shortDesc": "Gerenciador de mídias da Adobe",
+    "description": "O Bridge organiza, visualiza e exporta arquivos de mídia de forma prática e integrada.",
+    "price": 99.99,
+    "discount": 10,
+    "category": "produtividade",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Bridge+2025",
+    "gallery": [],
+    "details": [
+      "Visualização de metadados",
+      "Integração com Creative Cloud",
+      "Exportação rápida de imagens"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 23,
+    "name": "Adobe Media Encoder",
+    "shortDesc": "Conversão e exportação de vídeos",
+    "description": "O Media Encoder converte e otimiza vídeos em diversos formatos com qualidade profissional.",
+    "price": 129.99,
+    "discount": 20,
+    "category": "edição",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Media+Encoder",
+    "gallery": [],
+    "details": [
+      "Exportação rápida em lote",
+      "Presets otimizados",
+      "Integração com Premiere e AE"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 24,
+    "name": "Serato DJ Pro Suite",
+    "shortDesc": "Mixagem profissional de áudio",
+    "description": "O Serato DJ Pro é usado por DJs em todo o mundo para mixagens ao vivo e gravações.",
+    "price": 219.99,
+    "discount": 15,
+    "category": "áudio",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Serato+DJ+Pro",
+    "gallery": [],
+    "details": [
+      "Compatível com controladoras",
+      "Loops e efeitos em tempo real",
+      "Gravação de sets"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 25,
+    "name": "Adobe Substance 3D Designer",
+    "shortDesc": "Criação de texturas e materiais 3D",
+    "description": "O Substance 3D Designer é usado para criar materiais realistas e texturas procedurais para 3D e jogos.",
+    "price": 269.99,
+    "discount": 15,
+    "category": "3D",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Substance+3D",
+    "gallery": [],
+    "details": [
+      "Geração procedural de texturas",
+      "Integração com Unreal e Blender",
+      "Exportação PBR"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 26,
+    "name": "Solidworks Premium",
+    "shortDesc": "Projetos e simulações mecânicas",
+    "description": "O Solidworks Premium é um software de CAD 3D voltado para design de produtos, engenharia e simulações realistas.",
+    "price": 479.99,
+    "discount": 30,
+    "category": "engenharia",
+    "featured": true,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Solidworks",
+    "gallery": [],
+    "details": [
+      "Modelagem paramétrica 3D",
+      "Simulações estruturais e térmicas",
+      "Exportação para formatos CAD"
+    ],
+    "reviews": []
+  },
+  {
+    "id": 26,
+    "name": "Coredraw Technical Suite",
+    "shortDesc": "Design técnico e ilustração vetorial",
+    "description": "O CorelDRAW Technical Suite é focado em design técnico, ilustração e documentação precisa para engenharia e arquitetura.",
+    "price": 849.99,
+    "discount": 10,
+    "category": "Design",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=CorelDRAW+Technical",
+    "gallery": [],
+    "details": [
+      "Criação de desenhos técnicos precisos",
+      "Compatível com CAD e 3D",
+      "Ferramentas avançadas de ilustração"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Sketchup Pro 2026",
+    "shortDesc": "Modelagem 3D intuitiva",
+    "description": "O SketchUp Pro 2026 permite criar modelos 3D detalhados para arquitetura, design de interiores e engenharia.",
+    "price": 299.99,
+    "discount": 20,
+    "category": "3D",
+    "featured": false,
+    "image": "https://dummyimage.com/200x200/000/fff&text=SketchUp+Pro+2026",
+    "gallery": [],
+    "details": [
+      "Modelagem 3D rápida e fácil",
+      "Exportação para vários formatos CAD",
+      "Extensa biblioteca de componentes"
+    ]
+  }
+]
