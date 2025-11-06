@@ -18,7 +18,7 @@ const Account = () => {
       };
       fetchPurchases();
     }
-  }, [user, getPurchases]); // só uma array de dependências marlon gay
+  }, [user, getPurchases]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

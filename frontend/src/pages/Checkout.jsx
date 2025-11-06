@@ -55,7 +55,6 @@ const Checkout = () => {
             })}
           </ul>
         </div>
-
         {/* Resumo da compra */}
         <div className="checkout-summary">
           <h2>Resumo</h2>
