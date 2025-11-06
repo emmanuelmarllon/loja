@@ -18,7 +18,7 @@ const Account = () => {
       };
       fetchPurchases();
     }
-  }, [user]);
+  }, [user, getPurchases]); // só uma array de dependências
 
   const handleLogin = async (e) => {
     e.preventDefault();

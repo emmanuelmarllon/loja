@@ -1,4 +1,5 @@
 // AuthContext.jsx
+/* eslint-disable react-refresh/only-export-components */
 import React, { useContext, useState, useEffect, createContext } from "react";
 
 const AuthContext = createContext();

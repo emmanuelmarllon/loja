@@ -1,5 +1,5 @@
 import { useCart } from "../context/CartContext"; // suposição
-import React, { useState } from "react";
+import React from "react";
 
 const ProductButton = ({ product }) => {
   const { cartItems, addToCart } = useCart();
