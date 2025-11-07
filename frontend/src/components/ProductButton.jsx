@@ -1,18 +1,18 @@
-import { useCart } from "../context/CartContext"; // suposição
 import React from "react";
+import { useCart } from "../context/CartContext";
+import { useCartModal } from "../context/CartModalContext";
 
 const ProductButton = ({ product }) => {
   const { cartItems, addToCart } = useCart();
+  const { setIsModalOpen } = useCartModal();
 
-  // Checa se o produto já está no carrinho
   const isInCart = cartItems.some((item) => item.id === product.id);
 
   const handleClick = () => {
     if (!isInCart) {
       addToCart(product);
     } else {
-      // redireciona pra página do carrinho
-      window.location.href = "/cart";
+      setIsModalOpen(true);
     }
   };
 

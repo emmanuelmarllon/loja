@@ -1,23 +1,32 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import PixQr from "../components/PixQr";
 
 const Checkout = () => {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const totalPrice = cartItems
+  // Produto único vindo do "Comprar agora"
+  const singleProduct = location.state?.singleProduct;
+  const itemsToCheckout = singleProduct ? [singleProduct] : cartItems;
+
+  const totalPrice = itemsToCheckout
     .reduce((acc, item) => acc + item.price * (1 - item.discount / 100), 0)
     .toFixed(2);
 
   const handleFinish = (e) => {
     e.preventDefault();
     alert("Compra finalizada com sucesso! 🎉");
+
+    // Se for compra do carrinho, limpa os itens
+    if (!singleProduct) clearCart();
+
     navigate("/"); // volta pra página inicial
   };
 
-  if (cartItems.length === 0) {
+  if (itemsToCheckout.length === 0) {
     return (
       <div className="checkout-empty">
         <h2>Seu carrinho está vazio 😅</h2>
@@ -35,9 +44,9 @@ const Checkout = () => {
       <div className="checkout-container">
         {/* Lista dos produtos */}
         <div className="checkout-products">
-          <h2>Seus Softwares</h2>
+          <h2>Produtos</h2>
           <ul>
-            {cartItems.map((item, index) => {
+            {itemsToCheckout.map((item, index) => {
               const finalPrice = (
                 item.price *
                 (1 - item.discount / 100)
@@ -55,6 +64,7 @@ const Checkout = () => {
             })}
           </ul>
         </div>
+
         {/* Resumo da compra */}
         <div className="checkout-summary">
           <h2>Resumo</h2>
@@ -111,6 +121,7 @@ const Checkout = () => {
               Voltar às compras
             </Link>
           </form>
+
           <div className="pix">
             <h3>Ou pague com PIX</h3>
             <PixQr amount={totalPrice} />

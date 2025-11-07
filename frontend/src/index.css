@@ -1218,4 +1218,191 @@ button {
     width: 100%;
     margin-right: 0;
   }
+} /* === Container principal === */
+.adminPage {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #e2e8f0;
+  border-radius: 12px;
+}
+
+/* Título da página */
+.adminPage h1 {
+  color: #06b6d4;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* === Formulário de produto === */
+.productForm,
+.adminPage form {
+  margin-bottom: 2rem;
+  padding: 1.5rem; /* preserva do segundo */
+  background: #1e293b;
+  border-radius: 12px;
+}
+.adminPage button {
+  margin: 10px 0;
+}
+.productForm h3,
+.adminPage form h3 {
+  color: #06b6d4;
+  margin-bottom: 1rem;
+}
+
+.productForm input,
+.productForm textarea,
+.adminPage form input,
+.adminPage form textarea {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.8rem; /* do segundo */
+  margin-bottom: 1rem;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+.productForm input::placeholder,
+.productForm textarea::placeholder,
+.adminPage form input::placeholder,
+.adminPage form textarea::placeholder {
+  color: #94a3b8;
+}
+
+.productForm textarea,
+.adminPage form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkbox */
+.productForm label,
+.adminPage form label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.productForm input[type="checkbox"],
+.adminPage form input[type="checkbox"] {
+  width: max-content;
+  margin: 0;
+  accent-color: #06b6d4;
+  vertical-align: middle;
+}
+
+/* Botões do formulário */
+.productForm button,
+.adminPage form button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.productForm button[type="submit"],
+.adminPage form button[type="submit"] {
+  background-color: #06b6d4;
+  color: #0f172a;
+}
+
+.productForm button[type="submit"]:hover,
+.adminPage form button[type="submit"]:hover {
+  background-color: #0284c7;
+}
+
+.productForm button[type="button"],
+.adminPage form button[type="button"] {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+.productForm button[type="button"]:hover,
+.adminPage form button[type="button"]:hover {
+  opacity: 0.9;
+}
+
+/* Detalhes e Galeria */
+.productForm h4,
+.adminPage form h4 {
+  margin-bottom: 0.5rem;
+  color: #38bdf8;
+}
+
+.productForm div > input,
+.adminPage form div > input {
+  margin-bottom: 0.5rem;
+}
+
+/* === Tabela === */
+.adminPage table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.adminPage table th,
+.adminPage table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #334155;
+}
+
+.adminPage table th {
+  background-color: #1e293b;
+  color: #06b6d4;
+}
+
+.adminPage table td {
+  text-align: center;
+}
+
+.adminPage table tr:hover {
+  background-color: #1e293b88;
+}
+
+/* Botões da tabela */
+.adminPage table button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: bold;
+}
+
+.adminPage table button:first-child {
+  background-color: #06b6d4;
+  color: #0f172a;
+}
+
+.adminPage table button:last-child {
+  background-color: #ef4444;
+  color: #f1f5f9;
+}
+
+.adminPage table button:hover {
+  opacity: 0.8;
+}
+
+/* Rodapé da tabela */
+.adminPage table tfoot td {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.adminPage table tfoot tr td button {
+  margin-left: 1rem;
+  color: #0f172a;
+}
+.actionsCell {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }

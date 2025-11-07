@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,9 +10,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
 
-const Navbar = () => {
+import { useCartModal } from "../context/CartModalContext";
+const Navbar = ({ searchTerm, setSearchTerm }) => {
   const { cartItems, removeFromCart } = useCart();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, setIsModalOpen } = useCartModal();
   const location = useLocation();
 
   const totalPrice = cartItems
@@ -39,10 +41,15 @@ const Navbar = () => {
       </nav>
 
       <div className="navs-icons-container">
-        {/* mostra só se estiver em /products */}
+        {/* Renderiza a busca só na página /products */}
         {location.pathname === "/products" && (
           <div className="search-input-container">
-            <input type="text" placeholder="Buscar produtos..." />
+            <input
+              type="text"
+              placeholder="Buscar produtos..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <FontAwesomeIcon icon={faSearch} />
           </div>
         )}
@@ -58,29 +65,32 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faBars} />
         </button>
       </div>
-
-      {/* Modal do carrinho */}
       {isModalOpen && (
         <div
           className="cart-panel-container"
           onClick={() => setIsModalOpen(false)}
         >
+          {" "}
           <div className="cart-panel" onClick={(e) => e.stopPropagation()}>
+            {" "}
             <div className="cart-panel-header">
-              <h2>Seu Cesto Tech</h2>
+              {" "}
+              <h2>Seu Cesto Tech</h2>{" "}
               <button
                 className="close-btn"
                 onClick={() => setIsModalOpen(false)}
               >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
-            </div>
-
+                {" "}
+                <FontAwesomeIcon icon={faTimes} />{" "}
+              </button>{" "}
+            </div>{" "}
             {cartItems.length === 0 ? (
               <p>Nenhum software por aqui… ainda 😶</p>
             ) : (
               <>
+                {" "}
                 <ul className="cart-list">
+                  {" "}
                   {cartItems.map((item, index) => {
                     const finalPrice = (
                       item.price *
@@ -88,52 +98,60 @@ const Navbar = () => {
                     ).toFixed(2);
                     return (
                       <li key={index} className="cart-item">
+                        {" "}
                         <div className="cart-item-info">
+                          {" "}
                           <img
                             src={item.image}
                             alt={item.name}
                             className="cart-item-img"
-                          />
+                          />{" "}
                           <div className="cart-item-details">
-                            <strong>{item.name}</strong>
+                            {" "}
+                            <strong>{item.name}</strong>{" "}
                             <div className="cart-item-prices">
-                              <span className="new-price">R$ {finalPrice}</span>
+                              {" "}
+                              <span className="new-price">
+                                R$ {finalPrice}
+                              </span>{" "}
                               {item.discount > 0 && (
                                 <span className="old-price">
-                                  R$ {item.price.toFixed(2)}
+                                  {" "}
+                                  R$ {item.price.toFixed(2)}{" "}
                                 </span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
+                              )}{" "}
+                            </div>{" "}
+                          </div>{" "}
+                        </div>{" "}
                         <button
                           className="remove-btn"
                           onClick={() => removeFromCart(item.id)}
                         >
-                          Remover
-                        </button>
+                          {" "}
+                          Remover{" "}
+                        </button>{" "}
                       </li>
                     );
-                  })}
-                </ul>
-
+                  })}{" "}
+                </ul>{" "}
                 <div className="cart-footer">
+                  {" "}
                   <div className="cart-total">
-                    <span>Total:</span>
-                    <strong>R$ {totalPrice}</strong>
-                  </div>
-
+                    {" "}
+                    <span>Total:</span> <strong>R$ {totalPrice}</strong>{" "}
+                  </div>{" "}
                   <Link
                     to="/checkout"
                     className="checkout-btn"
                     onClick={() => setIsModalOpen(false)}
                   >
-                    Finalizar compra
-                  </Link>
-                </div>
+                    {" "}
+                    Finalizar compra{" "}
+                  </Link>{" "}
+                </div>{" "}
               </>
-            )}
-          </div>
+            )}{" "}
+          </div>{" "}
         </div>
       )}
     </header>

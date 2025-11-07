@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ProductButton from "../components/ProductButton";
+
 const Product = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [reviews, setReviews] = useState([]);
@@ -16,6 +18,7 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { user } = useAuth();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,7 +44,7 @@ const Product = () => {
         if (!relatedRes.ok)
           throw new Error("Erro ao buscar produtos relacionados");
         let relatedData = await relatedRes.json();
-        relatedData = relatedData.filter((p) => p.id !== productData.id); // remover o próprio produto
+        relatedData = relatedData.filter((p) => p.id !== productData.id);
         setRelatedProducts(relatedData);
       } catch (err) {
         console.error(err);
@@ -75,6 +78,11 @@ const Product = () => {
     }
   };
 
+  // Botão "Comprar agora" envia apenas esse produto
+  const handleBuyNow = () => {
+    navigate("/checkout", { state: { singleProduct: product } });
+  };
+
   if (loading) return <p>Carregando produto...</p>;
   if (error) return <p>Erro: {error}</p>;
   if (!product) return <p>Produto não encontrado</p>;
@@ -86,6 +94,7 @@ const Product = () => {
         <Link to="/">Início</Link> / <Link to="/products">Produtos</Link> /{" "}
         <span>{product.name}</span>
       </div>
+
       <div className="product-main">
         <div className="product-images">
           <img
@@ -110,6 +119,7 @@ const Product = () => {
         <div className="product-info">
           <h1>{product.name}</h1>
           <p>{product.shortDesc}</p>
+
           <div className="product-price">
             {product.discount > 0 ? (
               <>
@@ -126,8 +136,9 @@ const Product = () => {
 
           <div className="product-actions">
             <ProductButton product={product} />
-
-            <button className="btn btn-secondary">Comprar agora</button>
+            <button className="btn btn-secondary" onClick={handleBuyNow}>
+              Comprar agora
+            </button>
           </div>
 
           <div className="product-details">
@@ -140,6 +151,7 @@ const Product = () => {
           </div>
         </div>
       </div>
+
       {/* Avaliações */}
       <div className="product-reviews">
         <h3>Avaliações</h3>
@@ -176,6 +188,7 @@ const Product = () => {
           )}
         </div>
       </div>
+
       {/* Produtos relacionados */}
       {relatedProducts.length > 0 && (
         <div className="related-products">
