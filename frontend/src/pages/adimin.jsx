@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+// ===== ProductForm Component =====
 const ProductForm = ({ product, onSave, onCancel }) => {
   const [name, setName] = useState(product?.name || "");
   const [shortDesc, setShortDesc] = useState(product?.shortDesc || "");
@@ -15,7 +16,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const prodData = {
-      id: product?.id || undefined,
+      id: product?.id,
       name,
       shortDesc,
       description,
@@ -26,7 +27,6 @@ const ProductForm = ({ product, onSave, onCancel }) => {
       featured,
       image,
       gallery: gallery.filter((g) => g.trim() !== ""),
-      createdAt: product?.createdAt || new Date().toISOString(),
     };
     onSave(prodData);
   };
@@ -36,16 +36,16 @@ const ProductForm = ({ product, onSave, onCancel }) => {
     newDetails[idx] = value;
     setDetails(newDetails);
   };
-
   const addDetail = () => setDetails([...details, ""]);
   const removeDetail = () => setDetails(details.slice(0, -1));
-  const addGallery = () => setGallery([...gallery, ""]);
 
   const handleGalleryChange = (idx, value) => {
     const newGallery = [...gallery];
     newGallery[idx] = value;
     setGallery(newGallery);
   };
+  const addGallery = () => setGallery([...gallery, ""]);
+  const removeGallery = () => setGallery(gallery.slice(0, -1));
 
   return (
     <form className="productForm" onSubmit={handleSubmit}>
@@ -87,7 +87,6 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         value={category}
         onChange={(e) => setCategory(e.target.value)}
       />
-
       <label>
         Produto Destaque
         <input
@@ -118,15 +117,31 @@ const ProductForm = ({ product, onSave, onCancel }) => {
       <div className="formSection">
         <h4>Galeria</h4>
         {gallery.map((g, i) => (
-          <input
-            key={i}
-            value={g}
-            placeholder={`URL da imagem ${i + 1}`}
-            onChange={(e) => handleGalleryChange(i, e.target.value)}
-          />
+          <div key={i} style={{ marginBottom: "10px" }}>
+            <input
+              value={g}
+              placeholder={`URL da imagem ${i + 1}`}
+              onChange={(e) => handleGalleryChange(i, e.target.value)}
+            />
+            {g.trim() && (
+              <img
+                src={g}
+                alt={`Preview ${i + 1}`}
+                style={{
+                  width: 100,
+                  height: 100,
+                  objectFit: "cover",
+                  marginTop: 5,
+                }}
+              />
+            )}
+          </div>
         ))}
         <button type="button" onClick={addGallery}>
           Adicionar imagem
+        </button>
+        <button type="button" onClick={removeGallery}>
+          Remover imagem
         </button>
       </div>
 
@@ -136,6 +151,18 @@ const ProductForm = ({ product, onSave, onCancel }) => {
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
+        {image.trim() && (
+          <img
+            src={image}
+            alt="Imagem principal"
+            style={{
+              width: 150,
+              height: 150,
+              objectFit: "cover",
+              marginTop: 5,
+            }}
+          />
+        )}
       </div>
 
       <div className="formSection">
@@ -148,6 +175,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
   );
 };
 
+// ===== AdminPage Component =====
 const AdminPage = () => {
   const [products, setProducts] = useState([]);
   const [editing, setEditing] = useState(null);
@@ -166,12 +194,12 @@ const AdminPage = () => {
     }
   };
 
-  const handleSave = async (prod, isNew) => {
+  const handleSave = async (prod) => {
     try {
-      const method = isNew ? "POST" : "PUT";
-      const url = isNew
-        ? "http://localhost:3000/products"
-        : `http://localhost:3000/products/${prod.id}`;
+      const method = prod.id ? "PUT" : "POST";
+      const url = prod.id
+        ? `http://localhost:3000/products/${prod.id}`
+        : "http://localhost:3000/products";
 
       const res = await fetch(url, {
         method,
@@ -179,12 +207,15 @@ const AdminPage = () => {
         body: JSON.stringify(prod),
       });
 
-      if (!res.ok) throw new Error("Erro ao salvar produto");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Erro ao salvar produto");
+      }
 
       setEditing(null);
       fetchProducts();
     } catch (err) {
-      console.error(err);
+      console.error("Erro ao salvar produto:", err);
     }
   };
 
@@ -196,7 +227,6 @@ const AdminPage = () => {
         method: "DELETE",
       });
       if (!res.ok) throw new Error(`Erro ao deletar produto: ${res.status}`);
-
       fetchProducts();
     } catch (err) {
       console.error(err);
@@ -210,8 +240,7 @@ const AdminPage = () => {
       {editing && (
         <ProductForm
           product={editing}
-          isNew={!editing?.id}
-          onSave={(prod) => handleSave(prod, !editing?.id)}
+          onSave={handleSave}
           onCancel={() => setEditing(null)}
         />
       )}
@@ -219,17 +248,30 @@ const AdminPage = () => {
       <table>
         <thead>
           <tr>
-            <th>Nome</th>
+            <th>Produto</th>
             <th>Preço</th>
+            <th>Destaque</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           {products.map((p) => (
             <tr key={p.id}>
-              <td>{p.name}</td>
-              <td>R$ {p.price}</td>
-              <td className="actionsCell">
+              <td
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    style={{ width: 50, height: 50, objectFit: "cover" }}
+                  />
+                )}
+                {p.name}
+              </td>
+              <td>R$ {p.price.toFixed(2)}</td>
+              <td>{p.featured ? "✅" : "❌"}</td>
+              <td>
                 <button onClick={() => setEditing(p)}>Editar</button>
                 <button onClick={() => handleDelete(p.id)}>Deletar</button>
               </td>
@@ -238,9 +280,9 @@ const AdminPage = () => {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="3">
+            <td colSpan="4">
               Total de produtos: {products.length}
-              <button className="buttonRed" onClick={() => setEditing({})}>
+              <button style={{ marginLeft: 20 }} onClick={() => setEditing({})}>
                 Adicionar Produto
               </button>
             </td>

@@ -3,47 +3,58 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ProductButton from "../components/ProductButton";
 
+/**
+ * Componente Product
+ * Página de detalhes de um produto individual.
+ * Exibe informações do produto, imagens, preço, avaliações e produtos relacionados.
+ */
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
-  const [mainImage, setMainImage] = useState("");
-  const [reviews, setReviews] = useState([]);
+  const { user } = useAuth();
+
+  // Estados do componente
+  const [product, setProduct] = useState(null); // Produto atual
+  const [mainImage, setMainImage] = useState(""); // Imagem principal selecionada
+  const [reviews, setReviews] = useState([]); // Lista de avaliações
   const [newReview, setNewReview] = useState({
     user: "",
     rating: 5,
     comment: "",
-  });
-  const [relatedProducts, setRelatedProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const { user } = useAuth();
+  }); // Avaliação que o usuário está escrevendo
+  const [relatedProducts, setRelatedProducts] = useState([]); // Produtos da mesma categoria
+  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [error, setError] = useState(""); // Mensagem de erro
 
+  /**
+   * Efeito para buscar dados do produto, avaliações e produtos relacionados
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
 
-        // Buscar produto
+        // Buscar produto principal
         const productRes = await fetch(`http://localhost:3000/products/${id}`);
         if (!productRes.ok) throw new Error("Erro ao buscar produto");
         const productData = await productRes.json();
         setProduct(productData);
         setMainImage(productData.image);
 
-        // Buscar reviews
+        // Buscar avaliações do produto
         const reviewsRes = await fetch(`http://localhost:3000/reviews/${id}`);
         if (!reviewsRes.ok) throw new Error("Erro ao buscar avaliações");
         const reviewsData = await reviewsRes.json();
         setReviews(reviewsData);
 
-        // Buscar produtos relacionados
+        // Buscar produtos relacionados (mesma categoria)
         const relatedRes = await fetch(
           `http://localhost:3000/products?category=${productData.category}`
         );
         if (!relatedRes.ok)
           throw new Error("Erro ao buscar produtos relacionados");
         let relatedData = await relatedRes.json();
+        // Remover produto atual da lista
         relatedData = relatedData.filter((p) => p.id !== productData.id);
         setRelatedProducts(relatedData);
       } catch (err) {
@@ -57,6 +68,9 @@ const Product = () => {
     fetchData();
   }, [id]);
 
+  /**
+   * Envia uma nova avaliação para o backend
+   */
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     if (!newReview.user || !newReview.comment) return;
@@ -71,31 +85,35 @@ const Product = () => {
       if (!res.ok) throw new Error("Erro ao enviar avaliação");
 
       const savedReview = await res.json();
-      setReviews([savedReview, ...reviews]);
-      setNewReview({ user: "", rating: 5, comment: "" });
+      setReviews([savedReview, ...reviews]); // Adiciona a nova avaliação no topo da lista
+      setNewReview({ user: "", rating: 5, comment: "" }); // Limpa o formulário
     } catch (err) {
       console.error("Erro ao enviar avaliação:", err);
     }
   };
 
-  // Botão "Comprar agora" envia apenas esse produto
+  /**
+   * Compra imediata de um único produto
+   */
   const handleBuyNow = () => {
     navigate("/checkout", { state: { singleProduct: product } });
   };
 
+  // Mensagens de carregamento ou erro
   if (loading) return <p>Carregando produto...</p>;
   if (error) return <p>Erro: {error}</p>;
   if (!product) return <p>Produto não encontrado</p>;
 
   return (
     <section className="product-page">
-      {/* Breadcrumbs */}
+      {/* Breadcrumbs para navegação */}
       <div className="breadcrumbs">
         <Link to="/">Início</Link> / <Link to="/products">Produtos</Link> /{" "}
         <span>{product.name}</span>
       </div>
 
       <div className="product-main">
+        {/* Seção de imagens do produto */}
         <div className="product-images">
           <img
             src={mainImage || "/placeholder.png"}
@@ -116,10 +134,12 @@ const Product = () => {
           <div className="description">{product.description}</div>
         </div>
 
+        {/* Informações e ações do produto */}
         <div className="product-info">
           <h1>{product.name}</h1>
           <p>{product.shortDesc}</p>
 
+          {/* Preço e desconto */}
           <div className="product-price">
             {product.discount > 0 ? (
               <>
@@ -134,13 +154,15 @@ const Product = () => {
             )}
           </div>
 
+          {/* Botões de ação */}
           <div className="product-actions">
-            <ProductButton product={product} />
+            <ProductButton product={product} /> {/* Adicionar ao carrinho */}
             <button className="btn btn-secondary" onClick={handleBuyNow}>
               Comprar agora
             </button>
           </div>
 
+          {/* Lista de detalhes do produto */}
           <div className="product-details">
             <h3>Detalhes do Produto</h3>
             <ul>
@@ -152,7 +174,7 @@ const Product = () => {
         </div>
       </div>
 
-      {/* Avaliações */}
+      {/* Avaliações do produto */}
       <div className="product-reviews">
         <h3>Avaliações</h3>
         {reviews.slice(0, 3).map((rev, i) => (
@@ -170,6 +192,7 @@ const Product = () => {
           </Link>
         )}
 
+        {/* Formulário de nova avaliação */}
         <div className="review-form">
           <h4>Escreva sua avaliação</h4>
           {user ? (

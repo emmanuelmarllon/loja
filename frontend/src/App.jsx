@@ -8,6 +8,7 @@ import Account from "./pages/Account";
 import AllReviews from "./pages/AllReviews";
 import Checkout from "./pages/Checkout";
 import AdminPage from "./pages/adimin";
+import PrivateRoute from "./components/PrivateRoute";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -27,8 +28,24 @@ function App() {
         />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/all-reviews/:id" element={<AllReviews />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/admin" element={<AdminPage />} />
+
+        {/* Rotas protegidas */}
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute adminOnly={true}>
+              <AdminPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );

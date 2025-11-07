@@ -42,3 +42,12 @@ model usu_rios_ {
 
   @@map("usuários ")
 }
+model Purchase {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
+  total  Float
+  items  Json   
+    createdAt DateTime? // @db.Date @default(now())
+  @@map("purchases")
+}
+

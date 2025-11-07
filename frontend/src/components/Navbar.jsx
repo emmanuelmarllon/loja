@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,8 +8,8 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
-
 import { useCartModal } from "../context/CartModalContext";
+
 const Navbar = ({ searchTerm, setSearchTerm }) => {
   const { cartItems, removeFromCart } = useCart();
   const { isModalOpen, setIsModalOpen } = useCartModal();
@@ -21,12 +20,14 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
     .toFixed(2);
 
   return (
-    <header>
-      <h1>
-        Minha <span>Loja</span>
+    <header className="navbar">
+      {/* Logo */}
+      <h1 className="logo">
+        Soft<span>Tech</span>
       </h1>
 
-      <nav>
+      {/* Menu de navegação */}
+      <nav className="nav-links">
         <ul>
           <li>
             <Link to="/">Início</Link>
@@ -40,8 +41,9 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
         </ul>
       </nav>
 
-      <div className="navs-icons-container">
-        {/* Renderiza a busca só na página /products */}
+      {/* Ícones de ações */}
+      <div className="nav-actions" style={{ display: "flex" }}>
+        {/* Busca só na página de produtos */}
         {location.pathname === "/products" && (
           <div className="search-input-container">
             <input
@@ -54,17 +56,21 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
           </div>
         )}
 
-        <button onClick={() => setIsModalOpen(true)}>
+        {/* Botão do carrinho */}
+        <button className="cart-btn" onClick={() => setIsModalOpen(true)}>
           <FontAwesomeIcon icon={faShoppingCart} />
           {cartItems.length > 0 && (
-            <div className="products-count">{cartItems.length}</div>
+            <span className="products-count">{cartItems.length}</span>
           )}
         </button>
 
-        <button className="menu-button">
+        {/* Menu mobile */}
+        <button className="menu-btn">
           <FontAwesomeIcon icon={faBars} />
         </button>
       </div>
+
+      {/* Modal do carrinho */}
       {isModalOpen && (
         <div
           className="cart-panel-container"
@@ -112,7 +118,8 @@ const Navbar = ({ searchTerm, setSearchTerm }) => {
                             <div className="cart-item-prices">
                               {" "}
                               <span className="new-price">
-                                R$ {finalPrice}
+                                {" "}
+                                R$ {finalPrice}{" "}
                               </span>{" "}
                               {item.discount > 0 && (
                                 <span className="old-price">

@@ -1,4 +1,13 @@
 // src/api.js
+/**
+ * API helper para toda a comunicação com o backend.
+ * Mantém todas as requisições centralizadas para melhor manutenção.
+ */
+
+/**
+ * Busca todos os produtos disponíveis.
+ * @returns {Promise<Array>} Lista de produtos
+ */
 export const fetchProducts = async () => {
   try {
     const res = await fetch("http://localhost:3000/products");
@@ -8,6 +17,11 @@ export const fetchProducts = async () => {
   }
 };
 
+/**
+ * Busca um produto específico pelo seu ID.
+ * @param {number} id - ID do produto
+ * @returns {Promise<Object>} Produto encontrado
+ */
 export const fetchProductById = async (id) => {
   try {
     const res = await fetch(`http://localhost:3000/products/${id}`);
@@ -17,6 +31,12 @@ export const fetchProductById = async (id) => {
   }
 };
 
+/**
+ * Envia uma nova avaliação para um produto específico.
+ * @param {number} productId - ID do produto
+ * @param {Object} review - Objeto da review { user, rating, comment }
+ * @returns {Promise<Object>} Review criada
+ */
 export const postReview = async (productId, review) => {
   try {
     const res = await fetch(`http://localhost:3000/reviews/${productId}`, {
@@ -30,6 +50,11 @@ export const postReview = async (productId, review) => {
   }
 };
 
+/**
+ * Registra um novo usuário.
+ * @param {Object} user - Objeto do usuário { name, email, password }
+ * @returns {Promise<Object>} Dados do usuário registrado
+ */
 export const registerUser = async (user) => {
   try {
     const res = await fetch("http://localhost:3000/auth/register", {
@@ -43,6 +68,11 @@ export const registerUser = async (user) => {
   }
 };
 
+/**
+ * Realiza login de usuário existente.
+ * @param {Object} user - Objeto do usuário { email, password }
+ * @returns {Promise<Object>} Dados do usuário logado, token JWT, etc.
+ */
 export const loginUser = async (user) => {
   try {
     const res = await fetch("http://localhost:3000/auth/login", {

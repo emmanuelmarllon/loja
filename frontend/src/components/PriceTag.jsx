@@ -1,25 +1,30 @@
 import React from "react";
 
+/**
+ * Componente de exibição de preço
+ * @param {number} price - Preço original do produto
+ * @param {number} discount - Desconto em %
+ */
 export default function PriceTag({ price = 0, discount = 0 }) {
-  const discounted = +(price * (1 - (discount || 0) / 100)).toFixed(2);
+  // Calcula o preço com desconto, se houver
+  const discountedPrice = +(price * (1 - (discount || 0) / 100)).toFixed(2);
 
-  // formata em BRL
-  const format = (v) =>
-    v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  // Função para formatar valores em BRL
+  const formatBRL = (value) =>
+    value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
   return (
     <div className="price-block">
       {discount > 0 ? (
         <>
           <div className="price-left">
-            <div className="original-price">{format(price)}</div>
-            <div className="discounted-price">{format(discounted)}</div>
+            <div className="original-price">{formatBRL(price)}</div>
+            <div className="discounted-price">{formatBRL(discountedPrice)}</div>
           </div>
-
           <div className="price-badge">-{discount}%</div>
         </>
       ) : (
-        <div className="discounted-price single">{format(price)}</div>
+        <div className="discounted-price single">{formatBRL(price)}</div>
       )}
     </div>
   );

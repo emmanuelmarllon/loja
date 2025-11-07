@@ -1,24 +1,30 @@
+// src/routes/reviewsRoutes.js
 import express from "express";
 import { prisma } from "../utils/prisma.js";
+
 const router = express.Router();
 
-// Listar reviews de um produto
+/**
+ * Lista todas as avaliações de um produto
+ * GET /:productId
+ */
 router.get("/:productId", async (req, res) => {
   const { productId } = req.params;
-  console.log("Recebendo productId:", productId);
 
   try {
     const reviews = await prisma.reviews.findMany({
       where: { productId },
     });
     res.json(reviews);
-  } catch (err) {
-    console.error("Erro ao buscar avaliações:", err);
+  } catch {
     res.status(500).json({ error: "Erro ao buscar avaliações" });
   }
 });
 
-// Criar review
+/**
+ * Cria uma nova avaliação para um produto
+ * POST /:productId
+ */
 router.post("/:productId", async (req, res) => {
   const { productId } = req.params;
   const { user, rating, comment } = req.body;
@@ -33,8 +39,7 @@ router.post("/:productId", async (req, res) => {
       },
     });
     res.json(review);
-  } catch (err) {
-    console.error("Erro ao criar avaliação:", err);
+  } catch {
     res.status(500).json({ error: "Erro ao criar avaliação" });
   }
 });
