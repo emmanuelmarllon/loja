@@ -1,23 +1,24 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState } from "react";
+import React, { useState, useCallback } from "react";
+import { CartModalContext } from "./CartModalContextCore";
 
-const CartModalContext = createContext();
-
-/**
- * Provider do estado do modal do carrinho
- * Permite abrir/fechar o modal de qualquer componente
- */
 export const CartModalProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
+  const toggleModal = useCallback(() => setIsModalOpen((prev) => !prev), []);
+
   return (
-    <CartModalContext.Provider value={{ isModalOpen, setIsModalOpen }}>
+    <CartModalContext.Provider
+      value={{
+        isModalOpen,
+        setIsModalOpen,
+        openModal,
+        closeModal,
+        toggleModal,
+      }}
+    >
       {children}
     </CartModalContext.Provider>
   );
 };
-
-/**
- * Hook para acessar o contexto do modal do carrinho
- */
-export const useCartModal = () => useContext(CartModalContext);

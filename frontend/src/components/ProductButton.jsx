@@ -1,6 +1,6 @@
 import React from "react";
-import { useCart } from "../context/CartContext";
-import { useCartModal } from "../context/CartModalContext";
+import { useCart } from "../hooks/useCart";
+import { useCartModal } from "../hooks/useCartModal";
 
 /**
  * Botão para adicionar ou acessar produto no carrinho

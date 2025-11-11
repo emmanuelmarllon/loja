@@ -1,34 +1,44 @@
-// src/index.js
-import express from "express";
+import express, { response } from "express";
 import cors from "cors";
+import routes from "./src/routes/index.js";
+import { Payment } from "mercadopago";
 
-// Importação das rotas
-import productsRoutes from "./src/routes/products.js";
-import authRoutes from "./src/routes/auth.js";
-import reviewsRoutes from "./src/routes/reviews.js";
-import userRoutes from "./src/routes/user.js";
-import checkoutRoutes from "./src/routes/checkout.js";
-
+const PORT = process.env.PORT;
 const app = express();
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
 
-// Middlewares globais
-app.use(cors());           // Permite requisições de outras origens
-app.use(express.json());   // Faz o parsing do JSON nas requisições
+// app.get("/api/getpayment", async (req, res) => {
+//   try {
+//     const payment = new Payment({
+//       accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
+//     });
 
-// Rotas da aplicação
-app.use("/products", productsRoutes);
-app.use("/auth", authRoutes);
-app.use("/reviews", reviewsRoutes);
-app.use("/users", userRoutes);
-app.use("/checkout", checkoutRoutes);
+//     const information = await payment.get({
+//       id: req.headers.paymentid,
+//     });
 
-/**
- * Rota de teste básico para verificar se o backend está funcionando
- */
-app.get("/", (req, res) => res.send("Backend funcionando!"));
+//     res.status(200).send({ response: information });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({ error: "Erro ao buscar pagamento" });
+//   }
+// });
 
-// Inicia o servidor na porta 3000
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+// app.put("/api/updatepayment", async (req, res) => {
+//   await new payment({
+//     accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
+//   }).create({
+//     body{
+//         traansaction_amount: Number(req.headers.value),
+//         payment_method_id: pix,
+//         payer:{
+//             email: "teste@gmail.com",
+//         }
+//     }
+//   });
+// });
+
+app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+app.use("/api", routes);

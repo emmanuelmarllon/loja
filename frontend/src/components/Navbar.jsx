@@ -7,8 +7,8 @@ import {
   faShoppingCart,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { useCart } from "../context/CartContext";
-import { useCartModal } from "../context/CartModalContext";
+import { useCart } from "../hooks/useCart";
+import { useCartModal } from "../hooks/useCartModal";
 
 const Navbar = ({ searchTerm, setSearchTerm }) => {
   const { cartItems, removeFromCart } = useCart();

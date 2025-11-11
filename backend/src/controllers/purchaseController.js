@@ -1,30 +1,30 @@
 import { prisma } from "../utils/prisma.js";
-
-/**
- * Retorna o histórico de compras de um usuário autenticado
- * @param {Request} req - Objeto de requisição Express
- * @param {Response} res - Objeto de resposta Express
- */
-export const getUserPurchases = async (req, res) => {
+import * as purchaseService from "../services/purchaseService.js";
+export const getUserPurchasesController = async (req, res) => {
   try {
-    const userIdParam = req.params.id;
-    const authUserId = req.userId;
-
-    // Verifica se o usuário autenticado tem permissão para acessar esse histórico
-    if (authUserId.toString() !== userIdParam.toString()) {
-      return res.status(403).json({ error: "Acesso negado" });
-    }
-
-    // Busca compras do usuário ordenadas pela data de criação (mais recentes primeiro)
-    const purchases = await prisma.purchase.findMany({
-      where: { userId: userIdParam },
-      orderBy: { createdAt: "desc" },
-    });
-
-    // Retorna o array de compras (ou array vazio se não houver)
-    res.json(Array.isArray(purchases) ? purchases : []);
+    const userId = req.userId; // pega do token
+    const purchases = await purchaseService.getUserPurchases(userId);
+    res.status(200).json(purchases);
   } catch (err) {
-    // Retorna erro genérico em caso de falha
-    res.status(500).json({ error: "Erro ao buscar compras" });
+    res.status(500).json({ error: err.message });
   }
+};
+// Cria ou atualiza compra pendente
+export const createOrUpdatePending = async (userId, items) => {
+  // ... seu código atual aqui
+};
+
+// Retorna compra pendente
+export const getPending = async (userId) => {
+  return prisma.purchase.findFirst({
+    where: { userId, status: "pending" },
+  });
+};
+
+// Atualiza status da compra
+export const updateStatus = async (txid, status) => {
+  const purchase = await prisma.purchase.findUnique({ where: { txid } });
+  if (!purchase) throw new Error("Compra não encontrada");
+
+  return prisma.purchase.update({ where: { txid }, data: { status } });
 };

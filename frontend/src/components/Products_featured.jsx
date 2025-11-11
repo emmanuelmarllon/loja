@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PriceTag from "../components/PriceTag";
 import { Link } from "react-router-dom";
-
+import Api from "../api/Api";
 /**
  * Componente de exibição de produtos em destaque
  */
@@ -12,9 +12,7 @@ const ProductsFeatured = () => {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const res = await fetch("http://localhost:3000/products");
-        const data = await res.json();
-        // Filtra apenas produtos marcados como "featured"
+        const data = await Api.getProducts();
         setProducts(data.filter((p) => p.featured));
       } catch (err) {
         console.error("Erro ao buscar produtos:", err);

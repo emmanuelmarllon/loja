@@ -9,45 +9,51 @@ datasource db {
 }
 
 model produtos {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  category    String
-  createdAt   String
-  description String
-  details     String[]
-  discount    Int
-  featured    Boolean
-  gallery     String[]
-  image       String
-  name        String
-  price       Float
+  id          String   @id @default(uuid()) @map("_id")
+  name        String   @unique
   shortDesc   String
+  description String
+  price       Float
+  discount    Int
+  category    String
+  details     Json
+  featured    Boolean
+  image       String
+  gallery     Json
+  createdAt   DateTime @default(now())
+  reviews     Review[] // relação com reviews
 }
 
-model reviews {
+model Usuario {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  comment   String
-  createdAt DateTime @db.Date
-  productId String   @db.ObjectId
-  rating    Int
-  userId    String   @db.ObjectId
-}
-
-model usu_rios_ {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  IsAdmin   Boolean
-  createdAt DateTime @db.Date @default(now())
-  email     String  @unique
+  user      String   @unique
+  email     String   @unique
   name      String
   password  String
-
-  @@map("usuários ")
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Date
+  reviews   Review[] // relação com reviews
 }
+
 model Purchase {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId String
-  total  Float
-  items  Json   
-    createdAt DateTime? // @db.Date @default(now())
-  @@map("purchases")
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  total     Float
+  items     Json
+  txid      String   @unique
+  status    String
+  createdAt DateTime @default(now())
 }
 
+model Review {
+  id        String   @id @default(uuid()) @map("_id")          // UUID agora
+  userId    String   @db.ObjectId                             // mantemos ObjectId do usuário
+  productId String                                           // UUID do produto
+  comment   String
+  rating    Int
+  createdAt DateTime @default(now())
+
+  // Relações
+  user     Usuario  @relation(fields: [userId], references: [id])
+  product  produtos @relation(fields: [productId], references: [id])
+}

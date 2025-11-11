@@ -1,84 +1,110 @@
-import React, { useState } from "react";
-import { useCart } from "../context/CartContext";
-import { useAuth } from "../context/AuthContext";
+import React, { useState, useEffect, useRef } from "react";
+
+import { useCart } from "../hooks/useCart";
+import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import PixQr from "../components/PixQr";
 
-/**
- * Componente Checkout
- * Página de finalização de compra
- * Exibe produtos selecionados, resumo do pedido e opções de pagamento.
- * Suporta compra de produto único (via `location.state`) ou do carrinho inteiro.
- */
 const Checkout = () => {
-  const { cartItems, clearCart } = useCart(); // Contexto do carrinho
-  const { token } = useAuth(); // Contexto do usuário autenticado
-  const navigate = useNavigate(); // Navegação programática
-  const location = useLocation(); // Pega informações da rota
+  const { cartItems, clearCart } = useCart();
+  const { token } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [processing, setProcessing] = useState(false); // Controle de loading
+  const [processing, setProcessing] = useState(false);
+  const [purchase, setPurchase] = useState(null);
 
-  // Permite checkout de um único produto ou de todo o carrinho
-  const singleProduct = location.state?.singleProduct;
-  const itemsToCheckout = singleProduct ? [singleProduct] : cartItems;
+  // Itens do checkout: produto único ou carrinho
+  const itemsToCheckout = location.state?.singleProduct
+    ? [location.state.singleProduct]
+    : cartItems;
 
-  // Calcula o preço total considerando desconto de cada item
-  const totalPrice = itemsToCheckout
-    .reduce(
-      (acc, item) => acc + item.price * (1 - (item.discount || 0) / 100),
-      0
-    )
-    .toFixed(2);
+  // Calcula total
+  const totalPrice = parseFloat(
+    itemsToCheckout
+      .reduce(
+        (acc, item) =>
+          acc + (item.price || 0) * (1 - (item.discount || 0) / 100),
+        0
+      )
+      .toFixed(2)
+  );
 
-  // Constrói o payload da requisição de checkout
+  // Prepara payload pro backend
   const buildPayload = () =>
     itemsToCheckout.map((item) => ({
       productId: item.id,
       quantity: item.quantity ?? 1,
     }));
 
-  /**
-   * Função para processar pagamento
-   * @param {boolean} simulate - Se true, apenas simula pagamento
-   */
-  const processPayment = async (simulate = false) => {
-    if (!token) return alert("Você precisa estar logado."); // Proteção de acesso
-    if (itemsToCheckout.length === 0) return alert("Carrinho vazio 😅"); // Proteção de carrinho vazio
+  // Busca ou cria compra pendente
+  const hasFetchedPending = useRef(false);
 
+  useEffect(() => {
+    if (!token || itemsToCheckout.length === 0 || hasFetchedPending.current)
+      return;
+
+    hasFetchedPending.current = true;
+
+    const fetchOrCreatePending = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/payment/pending", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ items: buildPayload(), total: totalPrice }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok)
+          throw new Error(data.error || "Erro ao criar compra pending");
+
+        setPurchase(data.purchase);
+      } catch (err) {
+        console.error("Erro ao criar/atualizar compra pendente:", err);
+        alert(err.message);
+      }
+    };
+
+    fetchOrCreatePending();
+  }, [token, JSON.stringify(itemsToCheckout)]);
+
+  // Atualiza status da compra (completed/cancelled)
+  const updatePurchaseStatus = async (status) => {
+    if (!purchase) return;
     setProcessing(true);
 
     try {
-      const res = await fetch("http://localhost:3000/checkout", {
+      const res = await fetch("http://localhost:3000/payment/update-status", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ items: buildPayload() }),
+        body: JSON.stringify({ txid: purchase.txid, status }),
       });
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erro ao atualizar status");
 
-      if (res.ok) {
-        alert(
-          simulate
-            ? "Pagamento simulado aprovado e compra registrada! 🎉"
-            : "Compra finalizada com sucesso! 🎉"
-        );
-        if (!singleProduct) clearCart(); // Limpa o carrinho se não for compra única
-        navigate("/"); // Redireciona para home
-      } else {
-        alert(`Erro: ${data.error || "Desconhecido"}`);
+      if (status === "completed") {
+        clearCart();
+        setPurchase(null);
+        alert("Pagamento concluído! 🎉");
+        navigate("/");
       }
     } catch (err) {
-      console.error(err);
-      alert("Erro ao processar compra.");
+      console.error("Erro atualizando status:", err);
+      alert("Erro ao atualizar status da compra.");
     } finally {
       setProcessing(false);
     }
   };
 
-  // Caso não haja itens para checkout
+  // Carrinho vazio
   if (itemsToCheckout.length === 0) {
     return (
       <div className="checkout-empty">
@@ -94,15 +120,16 @@ const Checkout = () => {
     <section className="checkout-page">
       <h1>Finalizar Compra</h1>
       <div className="checkout-container">
-        {/* Lista de produtos selecionados */}
+        {/* Lista de produtos */}
         <div className="checkout-products">
           <h2>Produtos</h2>
           <ul>
             {itemsToCheckout.map((item, idx) => {
-              const finalPrice = (
-                item.price *
-                (1 - (item.discount || 0) / 100)
-              ).toFixed(2);
+              const finalPrice = parseFloat(
+                ((item.price || 0) * (1 - (item.discount || 0) / 100)).toFixed(
+                  2
+                )
+              );
               return (
                 <li key={idx} className="checkout-item">
                   {item.image && <img src={item.image} alt={item.name} />}
@@ -117,7 +144,7 @@ const Checkout = () => {
           </ul>
         </div>
 
-        {/* Resumo do pedido e opções de pagamento */}
+        {/* Resumo e pagamentos */}
         <div className="checkout-summary">
           <h2>Resumo</h2>
           <div className="summary-details">
@@ -135,12 +162,12 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Formulário de pagamento real */}
+          {/* Formulário cartão */}
           <form
             className="payment-form"
             onSubmit={(e) => {
               e.preventDefault();
-              processPayment();
+              updatePurchaseStatus("completed");
             }}
           >
             <h3>Pagamento Real</h3>
@@ -176,9 +203,9 @@ const Checkout = () => {
             </button>
           </form>
 
-          {/* Botão de simulação de pagamento */}
+          {/* Simulação */}
           <button
-            onClick={() => processPayment(true)}
+            onClick={() => updatePurchaseStatus("completed")}
             className="btn btn-success"
             disabled={processing}
             style={{ marginTop: 10 }}
@@ -186,20 +213,16 @@ const Checkout = () => {
             {processing ? "Processando..." : "Simular Pagamento"}
           </button>
 
-          {/* Opção de pagamento via PIX */}
-          <div className="pix" style={{ marginTop: 16 }}>
-            <h3>Ou pague com PIX</h3>
-            <PixQr amount={totalPrice} />
-          </div>
-
-          {/* Link para voltar às compras */}
-          <Link
-            to="/products"
-            className="btn btn-secondary"
-            style={{ marginTop: 10 }}
-          >
-            Voltar às compras
-          </Link>
+          {/* PIX */}
+          {purchase && (
+            <div className="pix" style={{ marginTop: 16 }}>
+              <h3>Ou pague com PIX</h3>
+              <PixQr
+                amount={totalPrice}
+                description={`Pagamento de licença - Pedido #${purchase.txid}`}
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>

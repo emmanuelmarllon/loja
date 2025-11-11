@@ -1,0 +1,590 @@
+[
+  {
+    "name": "AutoCAD 2026",
+    "shortDesc": "Desenho técnico e CAD",
+    "description": "O AutoCAD é referência em CAD para engenharia, arquitetura e design, permitindo criar desenhos precisos em 2D e 3D.",
+    "price": 850.0,
+    "discount": 93,
+    "category": "utilitários",
+    "details": [
+      "Desenho 2D/3D",
+      "Ferramentas de anotação",
+      "Compatível com DWG e DXF"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732208.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732208.png",
+      "https://cdn.worldvectorlogo.com/logos/autocad-2026.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "ADB Bridge",
+    "shortDesc": "Ferramenta de comunicação com dispositivos Android",
+    "description": "O ADB Bridge é usado por desenvolvedores para conectar, depurar e controlar dispositivos Android via computador.",
+    "price": 120.0,
+    "discount": 91,
+    "category": "utilitários",
+    "details": [
+      "Conexão com dispositivos",
+      "Depuração avançada",
+      "Compatível com Android SDK"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732209.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732209.png",
+      "https://cdn.worldvectorlogo.com/logos/adb-bridge.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Encoder 2025",
+    "shortDesc": "Conversão e compressão de arquivos",
+    "description": "O Encoder permite converter vídeos e áudios em múltiplos formatos, mantendo a qualidade e compatibilidade com diferentes dispositivos.",
+    "price": 250.0,
+    "discount": 92,
+    "category": "utilitários",
+    "details": [
+      "Conversão rápida",
+      "Suporte a vários formatos",
+      "Perfis pré-configurados"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732210.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732210.png",
+      "https://cdn.worldvectorlogo.com/logos/encoder-2025.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Technical Suite Utilities",
+    "shortDesc": "Ferramentas auxiliares para engenharia e design",
+    "description": "Conjunto de utilitários que complementam softwares de engenharia e design, aumentando produtividade e integração.",
+    "price": 420.0,
+    "discount": 90,
+    "category": "utilitários",
+    "details": [
+      "Automação de tarefas",
+      "Integração com CAD/3D",
+      "Suporte a scripts personalizados"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732211.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732211.png",
+      "https://cdn.worldvectorlogo.com/logos/technical-suite.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Cinema 4D",
+    "shortDesc": "Modelagem e animação 3D",
+    "description": "O Cinema 4D é uma ferramenta poderosa para criar animações, gráficos em movimento e modelagem 3D profissional.",
+    "price": 1199.99,
+    "discount": 94,
+    "category": "3D",
+    "details": [
+      "Modelagem 3D avançada",
+      "Animação profissional",
+      "Renderização de alta qualidade"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732200.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732200.png",
+      "https://cdn.worldvectorlogo.com/logos/cinema-4d.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Revit 2026",
+    "shortDesc": "Modelagem de informações de construção (BIM)",
+    "description": "O Revit é usado para arquitetura, engenharia e construção, permitindo criar modelos BIM precisos e coordenados.",
+    "price": 899.99,
+    "discount": 92,
+    "category": "3D",
+    "details": [
+      "Modelagem paramétrica",
+      "Documentação técnica",
+      "Colaboração em equipe"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732202.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732202.png",
+      "https://cdn.worldvectorlogo.com/logos/revit-2026.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Autodesk Inventor 2026",
+    "shortDesc": "Projetos mecânicos em 3D",
+    "description": "O Inventor é usado para design mecânico, permitindo criar peças, montagens e desenhos técnicos com precisão.",
+    "price": 950.0,
+    "discount": 93,
+    "category": "3D",
+    "details": [
+      "Modelagem paramétrica",
+      "Simulação mecânica",
+      "Exportação para fabricação"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732203.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732203.png",
+      "https://cdn.worldvectorlogo.com/logos/inventor-2026.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "SolidWorks",
+    "shortDesc": "Projetos mecânicos 3D e simulação",
+    "description": "O SolidWorks é usado para design de produtos, engenharia e prototipagem, com recursos de modelagem paramétrica e simulação.",
+    "price": 1020.0,
+    "discount": 95,
+    "category": "3D",
+    "details": [
+      "Modelagem paramétrica",
+      "Simulações avançadas",
+      "Assemblies complexas"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732204.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732204.png",
+      "https://cdn.worldvectorlogo.com/logos/solidworks.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Substance 3D",
+    "shortDesc": "Texturização e materiais 3D",
+    "description": "O Substance 3D permite criar materiais realistas para games, filmes e visualizações 3D, com controle total sobre texturas e shaders.",
+    "price": 599.99,
+    "discount": 92,
+    "category": "3D",
+    "details": [
+      "Texturas realistas",
+      "Exportação para motores de render",
+      "Integração com softwares 3D"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732205.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732205.png",
+      "https://cdn.worldvectorlogo.com/logos/substance-3d.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Technical Suite",
+    "shortDesc": "Conjunto de ferramentas técnicas",
+    "description": "A Technical Suite oferece um pacote completo de softwares para engenharia, simulação e design técnico em 3D.",
+    "price": 880.0,
+    "discount": 91,
+    "category": "3D",
+    "details": [
+      "Pacote completo",
+      "Integração de ferramentas",
+      "Foco em engenharia e design"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732206.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732206.png",
+      "https://cdn.worldvectorlogo.com/logos/technical-suite.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "SketchUp 2026",
+    "shortDesc": "Modelagem 3D para arquitetura e design",
+    "description": "O SketchUp é uma ferramenta intuitiva para modelagem 3D, ideal para arquitetura, design de interiores e projetos conceituais.",
+    "price": 499.99,
+    "discount": 94,
+    "category": "3D",
+    "details": [
+      "Interface intuitiva",
+      "Modelagem rápida",
+      "Suporte a plugins e extensões"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732207.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732207.png",
+      "https://cdn.worldvectorlogo.com/logos/sketchup-2026.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "FL Studio 24",
+    "shortDesc": "Produção musical profissional",
+    "description": "O FL Studio é uma das DAWs mais populares para produção musical, oferecendo sequenciamento, síntese e mixagem completa.",
+    "price": 499.99,
+    "discount": 92,
+    "category": "áudio",
+    "details": ["Sequenciamento avançado", "Plugins integrados", "Suporte VST"],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732199.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732199.png",
+      "https://cdn.worldvectorlogo.com/logos/fl-studio-24.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "FL Studio 25",
+    "shortDesc": "Nova geração de produção musical",
+    "description": "O FL Studio 25 traz novas ferramentas de composição, mixagem e masterização, mantendo sua interface intuitiva.",
+    "price": 549.99,
+    "discount": 93,
+    "category": "áudio",
+    "details": [
+      "Atualização de plugins",
+      "Suporte a MIDI avançado",
+      "Integração com hardware externo"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732199.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732199.png",
+      "https://cdn.worldvectorlogo.com/logos/fl-studio-25.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Ableton Live",
+    "shortDesc": "Produção e performance musical",
+    "description": "Ableton Live é ideal para composição, gravação e performance ao vivo, com ferramentas avançadas de looping e efeitos.",
+    "price": 599.99,
+    "discount": 94,
+    "category": "áudio",
+    "details": [
+      "Suporte a instrumentos virtuais",
+      "Live looping",
+      "Edição de áudio avançada"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732211.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732211.png",
+      "https://cdn.worldvectorlogo.com/logos/ableton-live.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Pro Tools HD",
+    "shortDesc": "Estúdio de gravação profissional",
+    "description": "O Pro Tools HD é usado em estúdios profissionais para gravação, edição e mixagem de áudio em alta qualidade.",
+    "price": 799.99,
+    "discount": 95,
+    "category": "áudio",
+    "details": [
+      "Gravação multi-track",
+      "Edição avançada",
+      "Compatível com hardware profissional"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732215.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732215.png",
+      "https://cdn.worldvectorlogo.com/logos/pro-tools-hd.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Serato DJ",
+    "shortDesc": "Software para DJs profissionais",
+    "description": "O Serato DJ permite mixagem ao vivo, controle de decks e efeitos avançados, sendo referência para DJs profissionais e amadores.",
+    "price": 349.99,
+    "discount": 91,
+    "category": "áudio",
+    "details": [
+      "Mixagem em tempo real",
+      "Compatível com controladores DJ",
+      "Efeitos integrados"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/732/732221.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/732/732221.png",
+      "https://cdn.worldvectorlogo.com/logos/serato-dj.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe Premiere Pro",
+    "shortDesc": "Edição profissional de vídeo",
+    "description": "O Premiere Pro é usado para edição de vídeos de alta qualidade, com suporte a multi-câmeras, efeitos avançados e integração com After Effects e Photoshop.",
+    "price": 950.75,
+    "discount": 96,
+    "category": "vídeo",
+    "details": [
+      "Edição 4K e 8K",
+      "Multi-track editing",
+      "Integração com Adobe Creative Cloud"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/5968/5968521.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/5968/5968521.png",
+      "https://cdn.worldvectorlogo.com/logos/adobe-premiere-cc-icon.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Vegas Pro 22",
+    "shortDesc": "Edição e produção de vídeo",
+    "description": "O Vegas Pro é uma solução completa para edição de vídeo e áudio, ideal para profissionais que precisam de rapidez e recursos avançados.",
+    "price": 780.5,
+    "discount": 92,
+    "category": "vídeo",
+    "details": [
+      "Edição não-linear",
+      "Suporte a 4K HDR",
+      "Recursos de áudio integrados"
+    ],
+    "featured": false,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Vegas_pro_logo.png",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/2/27/Vegas_pro_logo.png",
+      "https://cdn.worldvectorlogo.com/logos/vegas-pro-22.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe After Effects",
+    "shortDesc": "Animação e efeitos visuais",
+    "description": "O After Effects é referência em composição, animação e efeitos visuais para filmes, comerciais e vídeos online.",
+    "price": 1100.2,
+    "discount": 97,
+    "category": "vídeo",
+    "details": [
+      "Animação 2D e 3D",
+      "Integração com Premiere",
+      "Plugins avançados de efeitos"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/5968/5968517.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/5968/5968517.png",
+      "https://cdn.worldvectorlogo.com/logos/adobe-after-effects-cc-icon.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Filmora 14",
+    "shortDesc": "Edição de vídeo simplificada",
+    "description": "O Filmora é indicado para iniciantes e criadores de conteúdo, oferecendo uma interface intuitiva e efeitos prontos para redes sociais.",
+    "price": 320.99,
+    "discount": 93,
+    "category": "vídeo",
+    "details": [
+      "Efeitos pré-configurados",
+      "Suporte a 4K",
+      "Exportação rápida"
+    ],
+    "featured": false,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Filmora_logo.png",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/f/f9/Filmora_logo.png",
+      "https://cdn.worldvectorlogo.com/logos/filmora-14.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe Animate v24",
+    "shortDesc": "Criação de animações interativas",
+    "description": "O Animate é usado para criar animações 2D, banners interativos e conteúdos animados para web e mobile.",
+    "price": 650.0,
+    "discount": 91,
+    "category": "vídeo",
+    "details": [
+      "Animação vetorial",
+      "Exportação HTML5",
+      "Integração com Illustrator"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/5968/5968519.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/5968/5968519.png",
+      "https://cdn.worldvectorlogo.com/logos/adobe-animate-cc-icon.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe Media Encoder 2025",
+    "shortDesc": "Codificação e exportação de vídeos",
+    "description": "O Media Encoder permite renderizar e exportar vídeos rapidamente em diversos formatos, integrando-se com Premiere e After Effects.",
+    "price": 480.75,
+    "discount": 92,
+    "category": "vídeo",
+    "details": [
+      "Renderização rápida",
+      "Suporte a múltiplos formatos",
+      "Preset para redes sociais"
+    ],
+    "featured": false,
+    "image": "https://cdn.worldvectorlogo.com/logos/adobe-media-encoder.svg",
+    "gallery": [
+      "https://cdn.worldvectorlogo.com/logos/adobe-media-encoder.svg",
+      "https://cdn-icons-png.flaticon.com/512/5968/5968516.png"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "DaVinci Resolve 20",
+    "shortDesc": "Color grading e edição de vídeo",
+    "description": "O DaVinci Resolve é famoso por seu poder de correção de cores, edição não-linear e efeitos visuais profissionais.",
+    "price": 1050.0,
+    "discount": 95,
+    "category": "vídeo",
+    "details": ["Color grading avançado", "Edição multi-cam", "Suporte a 8K"],
+    "featured": true,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/DaVinci_Resolve_Logo.png",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/4/45/DaVinci_Resolve_Logo.png",
+      "https://cdn.worldvectorlogo.com/logos/davinci-resolve.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe Premiere Pro",
+    "shortDesc": "Edição profissional de vídeo",
+    "description": "O Premiere Pro é usado para edição de vídeos de alta qualidade, com suporte a multi-câmeras, efeitos avançados e integração com After Effects e Photoshop.",
+    "price": 950.75,
+    "discount": 96,
+    "category": "vídeo",
+    "details": [
+      "Edição 4K e 8K",
+      "Multi-track editing",
+      "Integração com Adobe Creative Cloud"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/5968/5968521.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/5968/5968521.png",
+      "https://cdn.worldvectorlogo.com/logos/adobe-premiere-cc-icon.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Vegas Pro 22",
+    "shortDesc": "Edição e produção de vídeo",
+    "description": "O Vegas Pro é uma solução completa para edição de vídeo e áudio, ideal para profissionais que precisam de rapidez e recursos avançados.",
+    "price": 780.5,
+    "discount": 92,
+    "category": "vídeo",
+    "details": [
+      "Edição não-linear",
+      "Suporte a 4K HDR",
+      "Recursos de áudio integrados"
+    ],
+    "featured": false,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Vegas_pro_logo.png",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/2/27/Vegas_pro_logo.png",
+      "https://cdn.worldvectorlogo.com/logos/vegas-pro-22.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe After Effects",
+    "shortDesc": "Animação e efeitos visuais",
+    "description": "O After Effects é referência em composição, animação e efeitos visuais para filmes, comerciais e vídeos online.",
+    "price": 1100.2,
+    "discount": 97,
+    "category": "vídeo",
+    "details": [
+      "Animação 2D e 3D",
+      "Integração com Premiere",
+      "Plugins avançados de efeitos"
+    ],
+    "featured": true,
+    "image": "https://cdn-icons-png.flaticon.com/512/5968/5968517.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/5968/5968517.png",
+      "https://cdn.worldvectorlogo.com/logos/adobe-after-effects-cc-icon.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Filmora 14",
+    "shortDesc": "Edição de vídeo simplificada",
+    "description": "O Filmora é indicado para iniciantes e criadores de conteúdo, oferecendo uma interface intuitiva e efeitos prontos para redes sociais.",
+    "price": 320.99,
+    "discount": 93,
+    "category": "vídeo",
+    "details": [
+      "Efeitos pré-configurados",
+      "Suporte a 4K",
+      "Exportação rápida"
+    ],
+    "featured": false,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Filmora_logo.png",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/f/f9/Filmora_logo.png",
+      "https://cdn.worldvectorlogo.com/logos/filmora-14.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe Animate v24",
+    "shortDesc": "Criação de animações interativas",
+    "description": "O Animate é usado para criar animações 2D, banners interativos e conteúdos animados para web e mobile.",
+    "price": 650.0,
+    "discount": 91,
+    "category": "vídeo",
+    "details": [
+      "Animação vetorial",
+      "Exportação HTML5",
+      "Integração com Illustrator"
+    ],
+    "featured": false,
+    "image": "https://cdn-icons-png.flaticon.com/512/5968/5968519.png",
+    "gallery": [
+      "https://cdn-icons-png.flaticon.com/512/5968/5968519.png",
+      "https://cdn.worldvectorlogo.com/logos/adobe-animate-cc-icon.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "Adobe Media Encoder 2025",
+    "shortDesc": "Codificação e exportação de vídeos",
+    "description": "O Media Encoder permite renderizar e exportar vídeos rapidamente em diversos formatos, integrando-se com Premiere e After Effects.",
+    "price": 480.75,
+    "discount": 92,
+    "category": "vídeo",
+    "details": [
+      "Renderização rápida",
+      "Suporte a múltiplos formatos",
+      "Preset para redes sociais"
+    ],
+    "featured": false,
+    "image": "https://cdn.worldvectorlogo.com/logos/adobe-media-encoder.svg",
+    "gallery": [
+      "https://cdn.worldvectorlogo.com/logos/adobe-media-encoder.svg",
+      "https://cdn-icons-png.flaticon.com/512/5968/5968516.png"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  },
+  {
+    "name": "DaVinci Resolve 20",
+    "shortDesc": "Color grading e edição de vídeo",
+    "description": "O DaVinci Resolve é famoso por seu poder de correção de cores, edição não-linear e efeitos visuais profissionais.",
+    "price": 1050.0,
+    "discount": 95,
+    "category": "vídeo",
+    "details": ["Color grading avançado", "Edição multi-cam", "Suporte a 8K"],
+    "featured": true,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/DaVinci_Resolve_Logo.png",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/4/45/DaVinci_Resolve_Logo.png",
+      "https://cdn.worldvectorlogo.com/logos/davinci-resolve.svg"
+    ],
+    "createdAt": "2025-11-07T00:00:00Z"
+  }
+]

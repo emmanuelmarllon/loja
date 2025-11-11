@@ -1,14 +1,11 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useState, useContext, useEffect } from "react";
-
-const CartContext = createContext();
+import React, { useState, useEffect, useCallback } from "react";
+import { CartContext } from "./CartContextCore.js";
 
 /**
- * Provider do carrinho de compras
- * Persiste os itens no localStorage para manter entre reloads
+ * CartProvider
+ * Provider responsável pelo estado global do carrinho de compras
  */
 export const CartProvider = ({ children }) => {
-  // Inicializa o carrinho com os dados do localStorage
   const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem("cartItems");
@@ -18,46 +15,44 @@ export const CartProvider = ({ children }) => {
     }
   });
 
-  // Sempre que cartItems mudar, atualiza o localStorage
+  // Persiste o carrinho no localStorage sempre que cartItems mudar
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  /**
-   * Adiciona um produto ao carrinho
-   * Ignora se o produto já estiver presente
-   */
-  const addToCart = (product) => {
-    const exists = cartItems.some((item) => item.id === product.id);
-    if (exists) return;
+  const addToCart = useCallback((product) => {
+    setCartItems((prev) => {
+      const exists = prev.some((item) => item.id === product.id);
+      if (exists) return prev;
+      return [...prev, product];
+    });
+  }, []);
 
-    setCartItems([...cartItems, product]);
-  };
+  const removeFromCart = useCallback((id) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  }, []);
 
-  /**
-   * Remove um produto do carrinho pelo ID
-   */
-  const removeFromCart = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
+  const clearCart = useCallback(() => setCartItems([]), []);
 
-  /**
-   * Limpa todo o carrinho
-   */
-  const clearCart = () => {
-    setCartItems([]);
-  };
+  const getItemCount = useCallback(() => cartItems.length, [cartItems]);
+
+  const getTotalPrice = useCallback(
+    () => cartItems.reduce((acc, item) => acc + item.price, 0),
+    [cartItems]
+  );
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        getItemCount,
+        getTotalPrice,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
 };
-
-/**
- * Hook para acessar o contexto do carrinho
- */
-export const useCart = () => useContext(CartContext);

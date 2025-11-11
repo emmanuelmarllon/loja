@@ -1,65 +1,104 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import Api, { API_BASE_URL } from "../api/Api";
 
-/**
- * Página de Conta do Usuário
- * Permite login, registro e visualização de histórico de compras
- */
 const Account = () => {
-  const { user, login, register, logout, getPurchases } = useAuth();
-
-  // Estados de formulário
+  const [user, setUser] = useState(null);
   const [isRegistering, setIsRegistering] = useState(false);
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  // Histórico de compras
   const [purchases, setPurchases] = useState([]);
 
-  // Buscar compras do usuário quando logado
+  const logTurbo = (label, data) => console.log(`[LOG TURBO] ${label}:`, data);
+
+  // Pega dados do usuário logado
+  const fetchUser = async () => {
+    logTurbo("fetchUser iniciado", {});
+    try {
+      const data = await Api.getMe();
+      logTurbo("fetchUser data", data);
+      setUser(data);
+    } catch (err) {
+      logTurbo("fetchUser erro", err);
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  // Busca histórico de compras
   useEffect(() => {
     if (!user) return;
 
     const fetchPurchases = async () => {
+      logTurbo("fetchPurchases iniciado", { userId: user.id });
       try {
-        const purchasesData = await getPurchases(user.id);
+        const purchasesData = await fetch(
+          `${API_BASE_URL}/userPurchase/${user.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        ).then((res) => res.json());
 
-        // Enriquecer cada item da compra com nome e imagem do produto
+        logTurbo("purchasesData bruta", purchasesData);
+
         const enrichedPurchases = await Promise.all(
           purchasesData.map(async (purchase) => {
             const itemsWithProduct = await Promise.all(
               purchase.items.map(async (item) => {
-                const res = await fetch(
-                  `http://localhost:3000/products/${item.productId}`
-                );
-                const product = await res.json();
-                return { ...item, name: product.name, image: product.image };
+                try {
+                  const product = await Api.getProduct(item.productId);
+                  logTurbo("produto encontrado", product);
+                  return { ...item, name: product.name, image: product.image };
+                } catch (err) {
+                  logTurbo("produto erro", { item, err });
+                  return { ...item, name: "Produto indisponível" };
+                }
               })
             );
             return { ...purchase, items: itemsWithProduct };
           })
         );
 
+        logTurbo("enrichedPurchases", enrichedPurchases);
         setPurchases(enrichedPurchases);
-      } catch {
+      } catch (err) {
+        logTurbo("fetchPurchases erro", err);
         setPurchases([]);
       }
     };
 
     fetchPurchases();
-  }, [user, getPurchases]);
+  }, [user]);
 
+  // Login
   // Login
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await login(email, password);
-      if (!res?.token) setError(res?.error || "Email ou senha inválidos");
-    } catch {
-      setError("Erro ao tentar logar");
+      const res = await Api.login(identifier, password);
+      console.log("[Login] Resposta do backend:", res);
+
+      if (res.token) {
+        localStorage.setItem("token", res.token);
+        await fetchUser();
+        window.location.reload(); // 🔄 força recarregar o app
+      } else if (res.error) {
+        setError(res.error);
+      } else {
+        setError("Usuário ou senha incorretos");
+      }
+    } catch (err) {
+      console.error("[Login] Erro catch:", err);
+      setError(err.message || "Erro ao tentar logar");
     }
   };
 
@@ -68,14 +107,31 @@ const Account = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await register(name, email, password);
-      if (res?.error) setError(res.error);
-    } catch {
+      logTurbo("tentando registro", { name, username, email, password });
+      const res = await Api.register(name, username, email, password);
+      logTurbo("register response", res);
+      if (res.token) {
+        localStorage.setItem("token", res.token);
+        await fetchUser();
+        window.location.reload(); // 🔄 recarrega depois do cadastro
+      } else {
+        setError(res.error || "Erro ao registrar");
+      }
+    } catch (err) {
+      logTurbo("register erro", err);
       setError("Erro ao tentar registrar");
     }
   };
 
-  // Formulário de login/registro
+  // Logout
+  const handleLogout = () => {
+    logTurbo("logout", {});
+    localStorage.removeItem("token");
+    setUser(null);
+    setPurchases([]);
+    window.location.reload(); // 🔄 limpa tudo e recarrega
+  };
+
   if (!user) {
     return (
       <div className="auth-container">
@@ -84,29 +140,56 @@ const Account = () => {
           onSubmit={isRegistering ? handleRegister : handleLogin}
           className="auth-form"
         >
-          {isRegistering && (
-            <input
-              type="text"
-              placeholder="Nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+          {isRegistering ? (
+            <>
+              <input
+                type="text"
+                placeholder="Nome completo"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Usuário"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                placeholder="Email ou Usuário"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </>
           )}
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+
           <button type="submit">
             {isRegistering ? "Registrar" : "Entrar"}
           </button>
@@ -131,25 +214,20 @@ const Account = () => {
   return (
     <div className="profile-page">
       <div className="profile-content">
-        {/* Sidebar */}
         <aside className="profile-info">
           <div className="info-card">
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
-              <h2>Olá, {user.name}! </h2>
-              <button className="logout-btn" onClick={logout}>
+            <div className="profile-header">
+              <h2>Olá, {user.name}!</h2>
+              <button className="logout-btn" onClick={handleLogout}>
                 Sair
               </button>
             </div>
             <h3>Informações de Conta</h3>
             <p>
               <strong>Email:</strong> {user.email}
+            </p>
+            <p>
+              <strong>usuario:</strong> {user.user}
             </p>
           </div>
 
@@ -161,7 +239,6 @@ const Account = () => {
           </div>
         </aside>
 
-        {/* Histórico de compras */}
         <section className="profile-purchases">
           <h3>Histórico de Compras</h3>
           {purchases.length === 0 ? (

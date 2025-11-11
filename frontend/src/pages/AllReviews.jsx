@@ -1,72 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import products from "../data/products.json";
+import ReviewList from "../components/ReviewList";
+import { useAuth } from "../hooks/useAuth";
+import Api from "../api/Api";
 
-/**
- * Componente AllReviews
- * Página para exibir todas as avaliações de um produto específico
- * Obtém o produto pelo parâmetro de rota `id` e renderiza suas reviews.
- */
 const AllReviews = () => {
-  // Pega o parâmetro `id` da URL
   const { id } = useParams();
-  const productId = parseInt(id);
+  const { user } = useAuth();
 
-  // Busca o produto na lista de produtos
-  const product = products.find((p) => p.id === productId);
+  const [productName, setProductName] = useState("");
 
-  // Caso o produto não exista, renderiza mensagem amigável de erro
-  if (!product) {
-    return (
-      <section className="all-reviews-page">
-        <Link to="/" className="btn-back">
-          ← Voltar para produtos
-        </Link>
-        <h1>Produto não encontrado 😅</h1>
-        <p>
-          O produto que você está tentando acessar não existe ou foi removido.
-        </p>
-      </section>
-    );
-  }
-
-  // Garante que `reviews` sempre seja um array
-  const reviews = product.reviews || [];
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const product = await Api.getProduct(id);
+        setProductName(product.name);
+      } catch (err) {
+        console.log("Erro ao buscar produto:", err);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
   return (
     <section className="all-reviews-page">
-      {/* Botão de retorno */}
-      <Link to="/" className="btn-back">
-        ← Voltar para produtos
+      <Link to={`/product/${id}`} className="btn-back">
+        ← Voltar para o produto
       </Link>
-
-      {/* Título e contextualização */}
-      <h1>
-        Aqui você pode ver <span>todas as avaliações</span>
-      </h1>
+      <h1>Todas as avaliações</h1>
       <p>
-        Veja o que estão dizendo sobre <strong>{product.name}</strong>
+        Aqui você pode ver o que estão falando sobre{" "}
+        <strong>{productName}</strong>
       </p>
-
-      {/* Conteúdo das avaliações */}
-      <div className="reviews-content">
-        <div className="reviews-list">
-          {reviews.length > 0 ? (
-            reviews.map((rev, i) => (
-              <div key={i} className="review">
-                {/* Nome do usuário e nota em estrelas */}
-                <strong>{rev.user}</strong> -{" "}
-                {"⭐".repeat(Math.min(rev.rating, 5))}
-                {/* Comentário do usuário */}
-                <p>{rev.comment}</p>
-              </div>
-            ))
-          ) : (
-            // Caso não existam reviews
-            <p>Nenhuma avaliação encontrada 😅</p>
-          )}
-        </div>
-      </div>
+      <ReviewList productId={id} user={user} limit={null} />
     </section>
   );
 };

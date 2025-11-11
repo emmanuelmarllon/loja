@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Api from "../api/Api"; // Usando a API central
 
 // ===== ProductForm Component =====
 const ProductForm = ({ product, onSave, onCancel }) => {
@@ -186,8 +187,7 @@ const AdminPage = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:3000/products");
-      const data = await res.json();
+      const data = await Api.getProducts();
       setProducts(data);
     } catch (err) {
       console.error(err);
@@ -197,21 +197,8 @@ const AdminPage = () => {
   const handleSave = async (prod) => {
     try {
       const method = prod.id ? "PUT" : "POST";
-      const url = prod.id
-        ? `http://localhost:3000/products/${prod.id}`
-        : "http://localhost:3000/products";
-
-      const res = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(prod),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Erro ao salvar produto");
-      }
-
+      const url = prod.id ? `/products/${prod.id}` : "/products";
+      await Api.request(url, { method, body: JSON.stringify(prod) }, true);
       setEditing(null);
       fetchProducts();
     } catch (err) {
@@ -221,12 +208,8 @@ const AdminPage = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Deletar produto?")) return;
-
     try {
-      const res = await fetch(`http://localhost:3000/products/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error(`Erro ao deletar produto: ${res.status}`);
+      await Api.request(`/products/${id}`, { method: "DELETE" }, true);
       fetchProducts();
     } catch (err) {
       console.error(err);
@@ -269,7 +252,7 @@ const AdminPage = () => {
                 )}
                 {p.name}
               </td>
-              <td>R$ {p.price.toFixed(2)}</td>
+              <td>R$ {parseFloat(p.price).toFixed(2)}</td>
               <td>{p.featured ? "✅" : "❌"}</td>
               <td>
                 <button onClick={() => setEditing(p)}>Editar</button>

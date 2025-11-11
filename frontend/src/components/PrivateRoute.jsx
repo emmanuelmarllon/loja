@@ -1,4 +1,4 @@
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 
 /**
@@ -9,14 +9,14 @@ import { Navigate } from "react-router-dom";
 const PrivateRoute = ({ children, adminOnly = false }) => {
   const { user } = useAuth();
 
-  // Redireciona se não estiver logado
+  // Não logado → redireciona pro home
   if (!user) return <Navigate to="/" />;
 
-  // Redireciona se rota for apenas para admins e usuário não for admin
-  if (adminOnly && !user.isAdmin) return <Navigate to="/" />;
+  // Rota apenas para admins → se não for admin, manda pro 404
+  if (adminOnly && !user.isAdmin) return <Navigate to="/404" />;
 
-  // Usuário autorizado, renderiza os children
-  return children;
+  // Usuário autorizado → renderiza a rota
+  return <>{children}</>;
 };
 
 export default PrivateRoute;
